@@ -5,11 +5,14 @@
     name: "{{ packages }}"
   vars:
     packages:
-      - libprotobuf-c-dev
-      - libjson-glib-dev
       - libglib2.0-dev
       - libgirepository1.0-dev
+      - libjson-glib-dev
+      - libprotobuf-c-dev
+      - libzmq3-dev
+      - libczmq-dev
       - meson
+      - valac
 
 - name: Clone libapex
   git:
@@ -20,7 +23,6 @@
 - name: Build libapex
   shell: |
     cd /usr/src/libapex
-    meson -Dshared-lib=true -Dwith-vapi=false _build
-    meson configure -Dprefix=/usr _build
+    meson -Dshared-lib=true -Dprefix=/usr _build
     ninja -C _build
     ninja -C _build install
